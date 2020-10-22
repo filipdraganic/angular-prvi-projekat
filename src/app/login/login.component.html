@@ -1,0 +1,26 @@
+<div class="col-4">
+    
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm.value)">
+        <div class="form-group">
+            <label for="inputEmail">Username</label>
+            <input type="email" class="form-control" placeholder="Enter username" formControlName="username">
+            <div class="error-message" *ngIf="username.errors?.required"> Username is required! </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" placeholder="Enter password" formControlName="password">
+            <div class="error-message" *ngIf="password.errors?.required"> Password is required! </div>
+            <div class="error-message" *ngIf="password.errors?.minlength"> Password has to be at least 4 characters long! </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputDuration">Session duration (seconds)</label>
+            <input type="number" class="form-control" placeholder="Enter duration in seconds" formControlName="duration">
+            <div class="error-message" *ngIf="duration.errors?.required"> Duration time is required! </div>
+
+        </div>
+            
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
+    </form>
+</div>
