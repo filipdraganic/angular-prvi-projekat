@@ -46,7 +46,9 @@ export class UserNewComponent implements OnInit {
       lastName: credentials["lastName"]
     }
 
-    this.userService.newUser(user)
+    this.userService.newUser(user).subscribe(user=>{
+      console.log(user)
+    })
 
     this.router.navigate([''])
   }

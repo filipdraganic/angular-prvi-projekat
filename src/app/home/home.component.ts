@@ -60,8 +60,11 @@ export class HomeComponent implements OnInit {
 
   deleteUser(id: number){
 
-    this.router.navigate([''])
-    this.userService.deleteUser(id)
+    this.userService.deleteUser(id).subscribe(user =>{
+      console.log(user)
+    })
+    location.reload();
+
   }
 
   newUser(){

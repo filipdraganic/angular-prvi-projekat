@@ -19,7 +19,7 @@ export class UserService {
   
   private helper = new JwtHelperService();
 
-  private user: User
+  private user: Observable<User>
 
   constructor(private http: HttpClient,
         private router:Router) { }
@@ -46,32 +46,50 @@ export class UserService {
   }
 
 
-  deleteUser(id:number): Boolean{
-
-    this.http.delete(this.delUserUrl+id, {
+  deleteUser(id:number): Observable<User>{
+    console.log(this.delUserUrl+id);
+    
+    this.user = this.http.delete<User>(this.delUserUrl+id, {
       params:{},
       headers:{          
-          'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+        'Authorization': 'Bearer ' + localStorage.getItem("jwt")
       }
       
     })
 
-    return true
+    return this.user
+    
   }
 
-  newUser(user:User){
+  newUser(user:User): Observable<User>{
     console.log(user);
-    
-    this.http.post(this.getUserUrl,{
+    const body:string = "{ \"id\": 0 , \"firstName\":\"" + user.firstName+ "\", \"lastName\": \"" +user.lastName + "\" }"
+    return this.http.post<User>(this.getUserUrl, body,
+    {
       params:{
-        id: 11,
-        firstName: user.firstName,
-        lastName: user.lastName
       },
       headers:{
+        'Content-Type': 'application/json;charset=utf-8',
         'Authorization': 'Bearer ' + localStorage.getItem("jwt")
 
       }
+     
+    })
+  }
+
+  editUser(user:User): Observable<User>{
+    console.log(user);
+    const body:string = "{ \"id\": "+user.id+" , \"firstName\":\"" + user.firstName+ "\", \"lastName\": \"" +user.lastName + "\" }"
+    return this.http.put<User>(this.getUserUrl, body,
+    {
+      params:{
+      },
+      headers:{
+        'Content-Type': 'application/json;charset=utf-8',
+        'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+
+      }
+     
     })
   }
 

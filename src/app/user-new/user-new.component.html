@@ -3,7 +3,7 @@
     <form [formGroup]="createForm" (ngSubmit)="submitForm(createForm.value)">
         
         <div class="form-group">
-            <label for="inputPassword">Password</label>
+            <label for="inputPassword">First name</label>
             <input class="form-control" placeholder="Enter first name" formControlName="firstName">
             <div class="error-message" *ngIf="firstName.errors?.required"> First name is required! </div>
             <div class="error-message" *ngIf="firstName.errors?.minlength"> First name has to be at least 4 characters long! </div>
@@ -11,13 +11,13 @@
         </div>
 
         <div class="form-group">
-            <label for="inputDuration">Session duration (seconds)</label>
+            <label for="inputDuration">Last name</label>
             <input class="form-control" placeholder="Enter last name" formControlName="lastName">
             <div class="error-message" *ngIf="lastName.errors?.required"> Last name is required! </div>
             <div class="error-message" *ngIf="lastName.errors?.minlength"> Last name has to be at least 4 characters long! </div>
 
         </div>
             
-        <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">Submit</button>
+        <button type="submit" class="btn btn-success" [disabled]="!createForm.valid">Create</button>
     </form>
 </div>
