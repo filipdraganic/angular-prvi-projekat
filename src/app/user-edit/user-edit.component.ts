@@ -21,7 +21,7 @@ export class UserEditComponent implements OnInit {
     private router:Router,
     private route: ActivatedRoute) {
       this.createForm = this.formBuilder.group({
-    
+        idField:['',[Validators.required]],
         firstName: ['', [Validators.required, Validators.minLength(4)]],
         lastName: ['', [Validators.required, Validators.minLength(4)]]        
 
@@ -35,7 +35,8 @@ export class UserEditComponent implements OnInit {
           console.log("IZ Edit component user :")
           console.log(this.user)
           this.createForm = this.formBuilder.group({
-    
+            
+            idField:[idNum,[Validators.required]],
             firstName: [this.user.firstName, [Validators.required, Validators.minLength(4)]],
             lastName: [this.user.lastName, [Validators.required, Validators.minLength(4)]]        
     
@@ -55,6 +56,10 @@ export class UserEditComponent implements OnInit {
 
   public get lastName(){
     return this.createForm.get("lastName")
+  }
+
+  public get idField(){
+    return this.createForm.get("idField")
   }
 
 
