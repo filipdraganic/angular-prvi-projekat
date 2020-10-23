@@ -51,12 +51,13 @@ export class UserService {
     
     this.user = this.http.delete<User>(this.delUserUrl+id, {
       params:{},
-      headers:{          
+      headers:{
+        'content-type':  'application/json',          
         'Authorization': 'Bearer ' + localStorage.getItem("jwt")
       }
       
     })
-
+    console.log("Deleted?")
     return this.user
     
   }

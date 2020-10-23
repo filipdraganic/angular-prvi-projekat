@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { UserService } from '../services/user/user.service';
 
@@ -12,20 +13,34 @@ import { UserService } from '../services/user/user.service';
 export class UserEditComponent implements OnInit {
 
   createForm : FormGroup
+  public user: User
+  private routeSub: Subscription
 
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
-    private router:Router) {
+    private router:Router,
+    private route: ActivatedRoute) {
 
-      this.createForm = this.formBuilder.group({
+      this.routeSub = this.route.params.subscribe(params => {
+        console.log(params) //log the entire params object
+        const idNum :number = Number(params["id"])
+        console.log(idNum) //log the value of id
+        this.userService.getUsers().subscribe((users:User[])=>{
+          this.user = users.filter(user => user.id === idNum)[0]
+          console.log(this.user)
+          this.createForm = this.formBuilder.group({
     
-        firstName: ['', [Validators.required, Validators.minLength(4)]],
-        lastName: ['', [Validators.required, Validators.minLength(4)]]        
-
-      })
+            firstName: [this.user.firstName, [Validators.required, Validators.minLength(4)]],
+            lastName: [this.user.lastName, [Validators.required, Validators.minLength(4)]]        
+    
+          })
+        })
+      });
+      
   }
 
   ngOnInit(): void {
+    
   }
 
   public get firstName(){
