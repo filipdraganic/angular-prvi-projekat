@@ -1,6 +1,6 @@
 
 <div class="row mt-4 ml-4">
-    <div class="col-2">
+    <div class="col-4">
         <img src="../../assets/profile.png" alt="profile picture">
     </div>
 
@@ -28,6 +28,22 @@
             
     
         </form>
+    </div>
+
+    <div class="col-4">
+
+        
+        <ul class="list-group mt-4">
+            
+            <div *ngFor="let group of groups">
+                <li class="list-group-item d-flex justify-content-between align-items-center btn" (click)="addMember(user,group.groupName)">
+                    <p class="col-8 h3" style="text-align: left;"> {{group.groupName}}</p>
+                    <span class="badge">{{groupLen(group)}}</span>
+                </li>
+            </div>
+
+        </ul>
+
     </div>
 
     

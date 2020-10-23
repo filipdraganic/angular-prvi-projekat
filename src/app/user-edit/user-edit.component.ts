@@ -20,13 +20,19 @@ export class UserEditComponent implements OnInit {
     private userService: UserService,
     private router:Router,
     private route: ActivatedRoute) {
+      this.createForm = this.formBuilder.group({
+    
+        firstName: ['', [Validators.required, Validators.minLength(4)]],
+        lastName: ['', [Validators.required, Validators.minLength(4)]]        
 
+      })
       this.routeSub = this.route.params.subscribe(params => {
         console.log(params) //log the entire params object
         const idNum :number = Number(params["id"])
         console.log(idNum) //log the value of id
         this.userService.getUsers().subscribe((users:User[])=>{
           this.user = users.filter(user => user.id === idNum)[0]
+          console.log("IZ Edit component user :")
           console.log(this.user)
           this.createForm = this.formBuilder.group({
     
@@ -56,7 +62,7 @@ export class UserEditComponent implements OnInit {
     console.log(credentials); 
 
     const user: User={
-      id : 0,
+      id : this.user.id,
       firstName: credentials["firstName"],
       lastName: credentials["lastName"]
     }

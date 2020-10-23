@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserNewComponent } from './user-new/user-new.component';
+import { GroupDetailsComponent } from './group-details/group-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UserNewComponent } from './user-new/user-new.component';
     NotFoundComponent,
     UserDetailsComponent,
     UserEditComponent,
-    UserNewComponent
+    UserNewComponent,
+    GroupDetailsComponent
   ],
   imports: [
     BrowserModule,

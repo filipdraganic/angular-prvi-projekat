@@ -57,6 +57,8 @@ export class UserService {
       }
       
     })
+
+    
     console.log("Deleted?")
     return this.user
     

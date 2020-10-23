@@ -6,6 +6,7 @@ import { UserService } from '../services/user/user.service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { identifierModuleUrl } from '@angular/compiler';
+import { GroupService } from '../services/group/group.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,9 @@ export class HomeComponent implements OnInit {
   
   private helper = new JwtHelperService
 
-  constructor(private userService: UserService,private router: Router) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private groupService: GroupService) { }
 
 
   ngOnInit(): void {
@@ -62,8 +65,14 @@ export class HomeComponent implements OnInit {
 
     this.userService.deleteUser(id).subscribe(user =>{
       console.log(user)
-      location.reload();
+      this.groupService.removeFromAllGroups(user)
 
+      this.userService.getUsers().subscribe(users => {
+        
+        console.log(users);
+        this.users = users
+      })
+    
     })
 
   }
