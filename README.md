@@ -1,5 +1,7 @@
 # AngularProjekat
 
+Prvi domaci iz Naprednog Web Programiranja napravljen uz pomoc Angular.js
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
 
 ## Development server
